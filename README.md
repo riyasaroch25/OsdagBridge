@@ -1,5 +1,12 @@
 # OsdagBridge
 
+> **FOSSEE Osdag Winter Internship 2026 — screening task submission**
+> ("OsdagBridge UI, 2D CAD, and Plotting Enhancements").
+> Start here: [`screening_task/README.md`](screening_task/README.md) ·
+> report: [`screening_task/report/final_research_report.pdf`](screening_task/report/final_research_report.pdf) ·
+> demo video: [`screening_task/media/demo_video.mp4`](screening_task/media/demo_video.mp4).
+> The rest of this README is the original project README.
+
 OsdagBridge is a modular, shared-core software plugin for the analysis and design of steel bridges within the Osdag ecosystem.  
 It supports desktop (PySide6), web (Django + React), and CLI interfaces through a unified Python core.
 
