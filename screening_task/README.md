@@ -4,6 +4,7 @@ FOSSEE Osdag Winter Internship 2026 screening task: in-place editing on the 2D C
 Save/Close in Additional Inputs, and result plots for end diaphragms and cross-bracing.
 
 **Report:** [`report/final_research_report.md`](report/final_research_report.md) ·
+**Demo video:** [`media/demo_video.mp4`](media/demo_video.mp4) (2.5 min, scripted demo: inputs are driven by `experiments/demo_recording.py`) ·
 **Docs:** [`docs/`](docs) · **Experiments:** [`experiments/`](experiments)
 
 ## Problem overview

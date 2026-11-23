@@ -627,14 +627,16 @@ class AdditionalInputs(QDialog):
         for w in widgets:
             if w is not None:
                 self._set_error_style(w, True)
-        if widgets[0] is not None:
-            self._reveal_widget(widgets[0])
         CustomMessageBox(
             title="Error",
             text=format_errors(missing),
             buttons=["OK"],
             dialogType=MessageBoxType.Critical,
         ).exec()
+        # Reveal/focus only after the box closes: focusing first and then losing
+        # focus to the box would fire the field's own focus-out validator popup.
+        if widgets[0] is not None:
+            self._reveal_widget(widgets[0])
         return False
 
     def _mark_modified(self, *_args) -> None:
@@ -674,7 +676,8 @@ class AdditionalInputs(QDialog):
             return False
         # Restore widgets + working dict from the last saved state so stale widget
         # values cannot leak into compute functions run at Design time.
-        if self.default_input_dict:
+        # Only roll back once the dialog has been loaded from a real input dict.
+        if self.default_input_dict and not self.interacted_first:
             self.set_input_dictionary(self.default_input_dict)
         self.is_modified = False
         return True

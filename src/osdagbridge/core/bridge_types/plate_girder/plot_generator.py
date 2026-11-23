@@ -1638,7 +1638,8 @@ def build_figure_transverse(ds, force_key, nodes, members, transverse_map, selec
     ax.set_ylabel("Bridge Width (m)", fontsize=10, labelpad=8)
     ax.set_zlabel(f"{symbol} ({unit})", fontsize=10, labelpad=8)
     kind = _TRANSVERSE_TITLES[force_key[0]] if force_key[0] in _TRANSVERSE_TITLES else "Diagram"
-    ax.set_title(f"{selection}: {kind}  —  {symbol} ({unit}, member-local)", fontsize=12,
+    axes_note = "global" if force_key.startswith("D") else "member-local"
+    ax.set_title(f"{selection}: {kind}  —  {symbol} ({unit}, {axes_note})", fontsize=12,
                  fontweight="bold", pad=12)
     fig._eng_scale = v_scale
     ax.view_init(elev=25, azim=-60)

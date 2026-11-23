@@ -128,3 +128,22 @@ Sample results (1.0 DL, skew 0°): end diaphragms Mz 62.41 / −31.21 kN·m in b
   without overhang were not run end-to-end (the code paths are covered by unit tests only).
 * Physical correctness of grillage cross-frame forces themselves (vs 3D models) is outside
   scope; NCHRP 725/962 indicate they should be interpreted with care.
+
+## E6 — Scripted demo run (`demo_recording.py` → `media/demo_video.mp4`)
+
+The demo video is rendered from the application's own windows (main window, dialogs,
+message boxes, tooltips) with a drawn cursor; inputs are driven by a script. Driving the
+real click path end-to-end found two defects that the earlier tests had not exercised,
+both fixed:
+
+1. **Focus-order double popup (Task II).** The first version focused the empty Custom field
+   *before* showing the Save error. When the error box took focus, the field lost it and the
+   field's existing focus-out validator opened a second, nested popup. The field is now
+   revealed and focused after the error box closes.
+2. **Discard before the dialog was loaded (Task II).** If the dialog was shown without being
+   initialised (Additional Inputs opened with a required basic input, such as Project
+   Location, still missing), Discard tried to restore an uninitialised state and raised an
+   exception inside `closeEvent`. Discard now restores only once the dialog has been loaded.
+
+The transverse deflection plot title was also corrected to state "global" axes
+(displacements are global nodal values; forces are member-local).
