@@ -1,0 +1,1023 @@
+{
+ "skew": "15",
+ "member_dropdown": [
+  "All",
+  "G1",
+  "G2",
+  "G3",
+  "All Transverse Members",
+  "End Diaphragms",
+  "Cross Bracings"
+ ],
+ "runs": [
+  {
+   "loadcase": "1.0 DL",
+   "selection": "All Transverse Members",
+   "component": "F<sub>x</sub>",
+   "render_ms": 271.5,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "ED G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "CB G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "CB G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "All Transverse Members",
+   "component": "V<sub>y</sub>",
+   "render_ms": 235.1,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 45.5748812865619,
+     "min": 42.40600750731924
+    },
+    "ED G2\u2013G3": {
+     "max": -40.48610229650326,
+     "min": -43.41597383734514
+    },
+    "CB G1\u2013G2": {
+     "max": 13.369605965397476,
+     "min": -5.386951501232351
+    },
+    "CB G2\u2013G3": {
+     "max": 5.037141439453888,
+     "min": -12.184862876890238
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "All Transverse Members",
+   "component": "V<sub>z</sub>",
+   "render_ms": 154.6,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "ED G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "CB G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "CB G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "All Transverse Members",
+   "component": "T<sub>x</sub>",
+   "render_ms": 159.4,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 0.0006953463389292037,
+     "min": -3.896851874018184e-05
+    },
+    "ED G2\u2013G3": {
+     "max": 0.00027782429079106004,
+     "min": 0.0002514147729160989
+    },
+    "CB G1\u2013G2": {
+     "max": 0.00041306140161039055,
+     "min": -0.0006485346769866093
+    },
+    "CB G2\u2013G3": {
+     "max": 0.0009275678227968529,
+     "min": -0.0012577829228790378
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "All Transverse Members",
+   "component": "M<sub>y</sub>",
+   "render_ms": 242.0,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "ED G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "CB G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "CB G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "All Transverse Members",
+   "component": "M<sub>z</sub>",
+   "render_ms": 153.6,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 64.17042537469258,
+     "min": -30.981839267526443
+    },
+    "ED G2\u2013G3": {
+     "max": 59.663427219060225,
+     "min": -30.982545421010844
+    },
+    "CB G1\u2013G2": {
+     "max": 25.11445208695725,
+     "min": -21.635858573208115
+    },
+    "CB G2\u2013G3": {
+     "max": 22.638076821558887,
+     "min": -21.636814919846508
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "All Transverse Members",
+   "component": "D<sub>x</sub>",
+   "render_ms": 147.1,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "ED G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "CB G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "CB G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "All Transverse Members",
+   "component": "D<sub>y</sub>",
+   "render_ms": 162.8,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "ED G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "CB G1\u2013G2": {
+     "max": 24.118842189214185,
+     "min": 5.906644111974482
+    },
+    "CB G2\u2013G3": {
+     "max": 24.060537557220012,
+     "min": 5.889552374965975
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "All Transverse Members",
+   "component": "D<sub>z</sub>",
+   "render_ms": 291.5,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "ED G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "CB G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "CB G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "End Diaphragms",
+   "component": "F<sub>x</sub>",
+   "render_ms": 98.1,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "ED G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "End Diaphragms",
+   "component": "V<sub>y</sub>",
+   "render_ms": 94.2,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 45.5748812865619,
+     "min": 42.40600750731924
+    },
+    "ED G2\u2013G3": {
+     "max": -40.48610229650326,
+     "min": -43.41597383734514
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "End Diaphragms",
+   "component": "V<sub>z</sub>",
+   "render_ms": 93.2,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "ED G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "End Diaphragms",
+   "component": "T<sub>x</sub>",
+   "render_ms": 100.4,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 0.0006953463389292037,
+     "min": -3.896851874018184e-05
+    },
+    "ED G2\u2013G3": {
+     "max": 0.00027782429079106004,
+     "min": 0.0002514147729160989
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "End Diaphragms",
+   "component": "M<sub>y</sub>",
+   "render_ms": 98.4,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "ED G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "End Diaphragms",
+   "component": "M<sub>z</sub>",
+   "render_ms": 100.2,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 64.17042537469258,
+     "min": -30.981839267526443
+    },
+    "ED G2\u2013G3": {
+     "max": 59.663427219060225,
+     "min": -30.982545421010844
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "End Diaphragms",
+   "component": "D<sub>x</sub>",
+   "render_ms": 90.6,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "ED G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "End Diaphragms",
+   "component": "D<sub>y</sub>",
+   "render_ms": 184.1,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "ED G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "End Diaphragms",
+   "component": "D<sub>z</sub>",
+   "render_ms": 89.7,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "ED G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "Cross Bracings",
+   "component": "F<sub>x</sub>",
+   "render_ms": 136.1,
+   "summary": {
+    "CB G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "CB G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "Cross Bracings",
+   "component": "V<sub>y</sub>",
+   "render_ms": 146.8,
+   "summary": {
+    "CB G1\u2013G2": {
+     "max": 13.369605965397476,
+     "min": -5.386951501232351
+    },
+    "CB G2\u2013G3": {
+     "max": 5.037141439453888,
+     "min": -12.184862876890238
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "Cross Bracings",
+   "component": "V<sub>z</sub>",
+   "render_ms": 142.1,
+   "summary": {
+    "CB G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "CB G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "Cross Bracings",
+   "component": "T<sub>x</sub>",
+   "render_ms": 227.8,
+   "summary": {
+    "CB G1\u2013G2": {
+     "max": 0.00041306140161039055,
+     "min": -0.0006485346769866093
+    },
+    "CB G2\u2013G3": {
+     "max": 0.0009275678227968529,
+     "min": -0.0012577829228790378
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "Cross Bracings",
+   "component": "M<sub>y</sub>",
+   "render_ms": 141.5,
+   "summary": {
+    "CB G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "CB G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "Cross Bracings",
+   "component": "M<sub>z</sub>",
+   "render_ms": 137.3,
+   "summary": {
+    "CB G1\u2013G2": {
+     "max": 25.11445208695725,
+     "min": -21.635858573208115
+    },
+    "CB G2\u2013G3": {
+     "max": 22.638076821558887,
+     "min": -21.636814919846508
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "Cross Bracings",
+   "component": "D<sub>x</sub>",
+   "render_ms": 140.2,
+   "summary": {
+    "CB G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "CB G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "Cross Bracings",
+   "component": "D<sub>y</sub>",
+   "render_ms": 232.6,
+   "summary": {
+    "CB G1\u2013G2": {
+     "max": 24.118842189214185,
+     "min": 5.906644111974482
+    },
+    "CB G2\u2013G3": {
+     "max": 24.060537557220012,
+     "min": 5.889552374965975
+    }
+   }
+  },
+  {
+   "loadcase": "1.0 DL",
+   "selection": "Cross Bracings",
+   "component": "D<sub>z</sub>",
+   "render_ms": 133.3,
+   "summary": {
+    "CB G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "CB G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "All Transverse Members",
+   "component": "F<sub>x</sub>",
+   "render_ms": 147.1,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "ED G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "CB G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "CB G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "All Transverse Members",
+   "component": "V<sub>y</sub>",
+   "render_ms": 237.2,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 31.601141957025177,
+     "min": 26.42053426569106
+    },
+    "ED G2\u2013G3": {
+     "max": -26.728939510502247,
+     "min": -31.390101209913134
+    },
+    "CB G1\u2013G2": {
+     "max": 15.026862050611667,
+     "min": 0.5609864242953051
+    },
+    "CB G2\u2013G3": {
+     "max": -0.7348214748492113,
+     "min": -15.003756617623496
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "All Transverse Members",
+   "component": "V<sub>z</sub>",
+   "render_ms": 147.0,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "ED G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "CB G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "CB G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "All Transverse Members",
+   "component": "T<sub>x</sub>",
+   "render_ms": 150.2,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 0.00018226832991712834,
+     "min": 0.00017192495138581865
+    },
+    "ED G2\u2013G3": {
+     "max": 0.00031151632312417663,
+     "min": 9.027596191395876e-05
+    },
+    "CB G1\u2013G2": {
+     "max": 0.0007156483859801992,
+     "min": -0.0009837278025319539
+    },
+    "CB G2\u2013G3": {
+     "max": 0.00028891561034461176,
+     "min": -0.0011473243530193042
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "All Transverse Members",
+   "component": "M<sub>y</sub>",
+   "render_ms": 142.3,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "ED G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "CB G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "CB G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "All Transverse Members",
+   "component": "M<sub>z</sub>",
+   "render_ms": 229.6,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 44.07001224547017,
+     "min": -21.907564384615448
+    },
+    "ED G2\u2013G3": {
+     "max": 43.630705008616815,
+     "min": -21.907068394851795
+    },
+    "CB G1\u2013G2": {
+     "max": 16.297370026373244,
+     "min": -46.99917536971202
+    },
+    "CB G2\u2013G3": {
+     "max": 16.034269971546212,
+     "min": -46.99845009592847
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "All Transverse Members",
+   "component": "D<sub>x</sub>",
+   "render_ms": 140.1,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "ED G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "CB G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "CB G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "All Transverse Members",
+   "component": "D<sub>y</sub>",
+   "render_ms": 157.4,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "ED G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "CB G1\u2013G2": {
+     "max": 17.749838231837067,
+     "min": 4.213308755200856
+    },
+    "CB G2\u2013G3": {
+     "max": 17.749838231837067,
+     "min": 4.226298056169849
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "All Transverse Members",
+   "component": "D<sub>z</sub>",
+   "render_ms": 145.7,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "ED G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "CB G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "CB G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "End Diaphragms",
+   "component": "F<sub>x</sub>",
+   "render_ms": 174.1,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "ED G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "End Diaphragms",
+   "component": "V<sub>y</sub>",
+   "render_ms": 93.5,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 31.601141957025177,
+     "min": 26.42053426569106
+    },
+    "ED G2\u2013G3": {
+     "max": -26.728939510502247,
+     "min": -31.390101209913134
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "End Diaphragms",
+   "component": "V<sub>z</sub>",
+   "render_ms": 97.8,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "ED G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "End Diaphragms",
+   "component": "T<sub>x</sub>",
+   "render_ms": 98.6,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 0.00018226832991712834,
+     "min": 0.00017192495138581865
+    },
+    "ED G2\u2013G3": {
+     "max": 0.00031151632312417663,
+     "min": 9.027596191395876e-05
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "End Diaphragms",
+   "component": "M<sub>y</sub>",
+   "render_ms": 98.7,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "ED G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "End Diaphragms",
+   "component": "M<sub>z</sub>",
+   "render_ms": 93.4,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 44.07001224547017,
+     "min": -21.907564384615448
+    },
+    "ED G2\u2013G3": {
+     "max": 43.630705008616815,
+     "min": -21.907068394851795
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "End Diaphragms",
+   "component": "D<sub>x</sub>",
+   "render_ms": 95.5,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "ED G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "End Diaphragms",
+   "component": "D<sub>y</sub>",
+   "render_ms": 98.0,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "ED G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "End Diaphragms",
+   "component": "D<sub>z</sub>",
+   "render_ms": 93.5,
+   "summary": {
+    "ED G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "ED G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "Cross Bracings",
+   "component": "F<sub>x</sub>",
+   "render_ms": 138.7,
+   "summary": {
+    "CB G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "CB G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "Cross Bracings",
+   "component": "V<sub>y</sub>",
+   "render_ms": 157.1,
+   "summary": {
+    "CB G1\u2013G2": {
+     "max": 15.026862050611667,
+     "min": 0.5609864242953051
+    },
+    "CB G2\u2013G3": {
+     "max": -0.7348214748492113,
+     "min": -15.003756617623496
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "Cross Bracings",
+   "component": "V<sub>z</sub>",
+   "render_ms": 140.7,
+   "summary": {
+    "CB G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "CB G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "Cross Bracings",
+   "component": "T<sub>x</sub>",
+   "render_ms": 217.8,
+   "summary": {
+    "CB G1\u2013G2": {
+     "max": 0.0007156483859801992,
+     "min": -0.0009837278025319539
+    },
+    "CB G2\u2013G3": {
+     "max": 0.00028891561034461176,
+     "min": -0.0011473243530193042
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "Cross Bracings",
+   "component": "M<sub>y</sub>",
+   "render_ms": 145.7,
+   "summary": {
+    "CB G1\u2013G2": {
+     "max": -0.0,
+     "min": -0.0
+    },
+    "CB G2\u2013G3": {
+     "max": -0.0,
+     "min": -0.0
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "Cross Bracings",
+   "component": "M<sub>z</sub>",
+   "render_ms": 137.5,
+   "summary": {
+    "CB G1\u2013G2": {
+     "max": 16.297370026373244,
+     "min": -46.99917536971202
+    },
+    "CB G2\u2013G3": {
+     "max": 16.034269971546212,
+     "min": -46.99845009592847
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "Cross Bracings",
+   "component": "D<sub>x</sub>",
+   "render_ms": 137.8,
+   "summary": {
+    "CB G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "CB G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "Cross Bracings",
+   "component": "D<sub>y</sub>",
+   "render_ms": 136.5,
+   "summary": {
+    "CB G1\u2013G2": {
+     "max": 17.749838231837067,
+     "min": 4.213308755200856
+    },
+    "CB G2\u2013G3": {
+     "max": 17.749838231837067,
+     "min": 4.226298056169849
+    }
+   }
+  },
+  {
+   "loadcase": "Case1 1xClassA",
+   "selection": "Cross Bracings",
+   "component": "D<sub>z</sub>",
+   "render_ms": 213.9,
+   "summary": {
+    "CB G1\u2013G2": {
+     "max": 0.0,
+     "min": 0.0
+    },
+    "CB G2\u2013G3": {
+     "max": 0.0,
+     "min": 0.0
+    }
+   }
+  }
+ ],
+ "girder_plot_after": ""
+}

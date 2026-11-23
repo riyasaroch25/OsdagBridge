@@ -373,6 +373,8 @@ OUTPUT_KEYS = [
     "transverse_members",
     "girders",
     "crossbracings",
+    "end_diaphragms",
+    "support_transverse_members",
     "forces",
     "displacements",
     "force_components",
@@ -433,5 +435,10 @@ def post_process(data: dict) -> dict:
     rebuild_components(data)
     attach_girders(data)
     attach_crossbracings(data, cb_raw_ids, members_dict, node_coords)
+    # End diaphragms: support-line transverse elements joining two girders
+    # (same rule as crossbracings, applied to the start/end edge groups).
+    data["end_diaphragms"] = build_crossbracings(
+        data.get("support_transverse_members", []), members_dict, node_coords, data.get("girders", {})
+    )
 
     return {k: data[k] for k in OUTPUT_KEYS if k in data}

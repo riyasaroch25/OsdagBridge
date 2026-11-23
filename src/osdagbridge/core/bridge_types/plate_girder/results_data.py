@@ -81,6 +81,150 @@ class LazyLoadcaseResults(Mapping):
 _TOOLS_DIR = Path(__file__).resolve().parents[5] / "tools"
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Member classification and transverse-member results (Task III)
+# ─────────────────────────────────────────────────────────────────────────────
+
+LONGITUDINAL_GROUPS = ("edge_beam", "exterior_main_beam_1", "exterior_main_beam_2", "interior_main_beam")
+TRANSVERSE_GROUPS = ("start_edge", "end_edge", "transverse_slab")
+
+
+def _is_geometrically_longitudinal(n1, n2, nodes, tol=1e-3) -> bool:
+    """Both end nodes share transverse (z) and vertical (y) coordinates."""
+    a, b = nodes[n1], nodes[n2]
+    return abs(a[2] - b[2]) < tol and abs(a[1] - b[1]) < tol
+
+
+def classify_members(nodes: dict, members: dict, groups: dict) -> tuple[list, list]:
+    """Split element tags into (longitudinal, transverse).
+
+    ospgrillage group membership is used first because it is how the model was
+    *built* (``set_member``). Purely geometric rules break for curved girders or
+    meshes where a longitudinal line is not parallel to global X. Elements that
+    belong to no group (in OsdagBridge models, the second edge beam is not in
+    ``edge_beam``) fall back to the geometric rule.
+    """
+    long_ids = {int(e) for g in LONGITUDINAL_GROUPS for e in (groups.get(g) or [])}
+    trans_ids = {int(e) for g in TRANSVERSE_GROUPS for e in (groups.get(g) or [])}
+    longitudinal, transverse = [], []
+    for tag, (n1, n2) in members.items():
+        t = int(tag)
+        if t in long_ids:
+            longitudinal.append(tag)
+        elif t in trans_ids:
+            transverse.append(tag)
+        elif n1 in nodes and n2 in nodes:
+            (longitudinal if _is_geometrically_longitudinal(n1, n2, nodes) else transverse).append(tag)
+    return longitudinal, transverse
+
+
+# Member group names offered in the plot member dropdown (see common.py keys).
+def build_transverse_member_map(result_data: dict) -> dict:
+    """Transverse members that connect two girders, grouped for plotting.
+
+    Returns ``{"end_diaphragms": [...], "cross_bracings": [...]}`` where each item
+    is ``{"member": str, "nodes": (i, j), "left_girder": "G1", "right_girder": "G2"}``.
+    Elements joining an edge beam to a girder are deck-overhang strips and are
+    excluded (same rule as the cross-bracing / end-diaphragm design code).
+    """
+    def _items(chains):
+        out = []
+        for ch in chains or []:
+            m = str(ch["members"][0])
+            out.append({
+                "member": m,
+                "nodes": (int(ch["start"]["node"]), int(ch["end"]["node"])),
+                "left_girder": ch["left_girder"],
+                "right_girder": ch["right_girder"],
+            })
+        return out
+    return {
+        "end_diaphragms": _items(result_data.get("end_diaphragms")),
+        "cross_bracings": _items(result_data.get("crossbracings")),
+    }
+
+
+def member_local_axes(xyz_i, xyz_j):
+    """Unit vectors (ex, ey, ez) of a horizontal grillage member.
+
+    ex runs i -> j, ey is global vertical (Y), ez = ex x ey. For a girder along
+    +X this gives (X, Y, Z), i.e. local == global, so girder plots are unchanged.
+    """
+    import numpy as np
+    ex = np.asarray(xyz_j, float) - np.asarray(xyz_i, float)
+    L = float(np.linalg.norm(ex))
+    if L == 0.0:
+        raise ValueError("Zero-length member")
+    ex /= L
+    ey = np.array([0.0, 1.0, 0.0])
+    ey = ey - ex.dot(ey) * ex           # robust if a member is not exactly horizontal
+    ey /= np.linalg.norm(ey)
+    ez = np.cross(ex, ey)
+    return ex, ey, ez
+
+
+FORCE_COMPONENTS_GLOBAL = ("Vx", "Vy", "Vz", "Mx", "My", "Mz")
+# UI key -> (vector, local axis index): Fx axial, Fy/Fz shears, Mx torsion, My/Mz bending
+LOCAL_FORCE_INDEX = {"Fx": ("F", 0), "Fy": ("F", 1), "Fz": ("F", 2),
+                     "Mx": ("M", 0), "My": ("M", 1), "Mz": ("M", 2)}
+
+
+def member_internal_forces(end_forces: dict, xyz_i, xyz_j) -> dict:
+    """Internal forces at both ends of a member, in member-local axes.
+
+    ``end_forces`` are ospgrillage *global* element end forces
+    (``Vx_i ... Mz_j``; get_results() default). The end-force vectors are rotated
+    into the local frame; internal (section) forces follow the usual convention
+    S(i) = -F_end(i), S(j) = +F_end(j), so both ends use one sign convention.
+
+    Returns ``{key: (value_i, value_j)}`` for key in LOCAL_FORCE_INDEX, in N / N·m.
+    """
+    import numpy as np
+    R = np.vstack(member_local_axes(xyz_i, xyz_j))
+    out = {}
+    vec = {}
+    for end in ("i", "j"):
+        F = np.array([float(end_forces[f"V{a}_{end}"]) for a in "xyz"])
+        M = np.array([float(end_forces[f"M{a}_{end}"]) for a in "xyz"])
+        vec[end] = {"F": R @ F, "M": R @ M}
+    for key, (kind, idx) in LOCAL_FORCE_INDEX.items():
+        out[key] = (-float(vec["i"][kind][idx]), float(vec["j"][kind][idx]))
+    return out
+
+
+def transverse_member_results(ds_lc, nodes: dict, members: dict, items: list, key: str) -> list:
+    """Per-member values for one load case and one UI component.
+
+    ``ds_lc`` is ``ds_all.sel(Loadcase=...)``. Forces/moments: member-local
+    internal values in kN / kN·m. Displacements ("Dx"/"Dy"/"Dz"): global nodal
+    translations in mm (same convention as the girder deflection plot).
+    Returns ``[{"member", "left_girder", "right_girder", "xyz_i", "xyz_j",
+    "value_i", "value_j"}]``.
+    """
+    rows = []
+    if key in ("Dx", "Dy", "Dz"):
+        comp_names = [str(c) for c in ds_lc["displacements"].coords["Component"].values]
+        comp = key[1].lower()
+        comp = comp if comp in comp_names else "d" + comp
+        for it in items:
+            i, j = it["nodes"]
+            vi = float(ds_lc["displacements"].sel(Node=i, Component=comp).values) * 1000.0
+            vj = float(ds_lc["displacements"].sel(Node=j, Component=comp).values) * 1000.0
+            rows.append({**it, "xyz_i": nodes[i], "xyz_j": nodes[j], "value_i": vi, "value_j": vj})
+        return rows
+
+    names = [f"{c}_{e}" for e in ("i", "j") for c in FORCE_COMPONENTS_GLOBAL]
+    for it in items:
+        m = int(it["member"])
+        n1, n2 = members[m] if m in members else members[str(m)]
+        vals = ds_lc["forces"].sel(Element=m, Component=names).values
+        end_forces = dict(zip(names, (float(v) for v in vals)))
+        si, sj = member_internal_forces(end_forces, nodes[n1], nodes[n2])[key]
+        rows.append({**it, "xyz_i": nodes[n1], "xyz_j": nodes[n2],
+                     "value_i": si / 1000.0, "value_j": sj / 1000.0})   # N -> kN, N·m -> kN·m
+    return rows
+
+
 def _build_nodes_members() -> tuple[dict, dict]:
     """Read node coords and element connectivity from the live openseespy model."""
     nodes = {
@@ -408,18 +552,9 @@ def _build_full_data(model, edge_dist: float = 0.0, dataset=None, lazy: bool = F
     disp_components = [str(
         c) for c in ds0["displacements"].coords["Component"].values] if "displacements" in ds0.data_vars else []
 
-    # Classify members: longitudinal = both nodes share same Z and same Y
-    _z_tol = 1e-3
-    longitudinal_members = []
-    transverse_members = []
-    for tag, (n1, n2) in members.items():
-        if n1 not in nodes or n2 not in nodes:
-            continue
-        if (abs(nodes[n1][2] - nodes[n2][2]) < _z_tol and
-                abs(nodes[n1][1] - nodes[n2][1]) < _z_tol):
-            longitudinal_members.append(tag)
-        else:
-            transverse_members.append(tag)
+    # Classify members: ospgrillage group membership is authoritative; geometry
+    # is only a fallback for elements that belong to no group (see classify_members).
+    longitudinal_members, transverse_members = classify_members(nodes, members, groups)
 
     data: dict = {
         "nodes": {str(k): list(v) for k, v in nodes.items()},
@@ -427,6 +562,9 @@ def _build_full_data(model, edge_dist: float = 0.0, dataset=None, lazy: bool = F
         "groups": groups,
         "longitudinal_members": longitudinal_members,
         "transverse_members": transverse_members,
+        # Support-line transverse elements (end diaphragms). Kept separately because
+        # post_process() drops the raw "groups" dict.
+        "support_transverse_members": list(groups.get("start_edge", [])) + list(groups.get("end_edge", [])),
         "edge_dist": float(edge_dist),
         "loadcases": list(loadcases),
         "force_components": force_components,

@@ -22,6 +22,7 @@ from osdagbridge.core.bridge_types.plate_girder.plot_generator import (
     build_figure_bmd,
     build_figure_deflection,
     build_figure_grillage,
+    build_figure_transverse,
     _add_node_number_labels,
     _add_element_number_labels,
     FORCE_MAP,
@@ -407,7 +408,8 @@ class MplPlotWidget(QWidget):
                     pass
 
     def setup(self, ds_all, loadcases: list, nodes: dict, members: dict,
-              edge_dist: float = 0.0):
+              edge_dist: float = 0.0, transverse_map: dict | None = None):
+        self._transverse_map = transverse_map or {}
         self._ds_all    = ds_all
         self._loadcases = list(loadcases)
         self._nodes     = nodes
@@ -538,7 +540,14 @@ class MplPlotWidget(QWidget):
 
         # (Your existing if/elif/else block to build the new figures)
         eng_scale = self._eng_scale
-        if force_key in _SFD_KEYS:
+        from osdagbridge.core.utils.common import ANALYSIS_TRANSVERSE_SELECTIONS
+        if sel_girder in ANALYSIS_TRANSVERSE_SELECTIONS:
+            self._fig, self._summary_data = build_figure_transverse(
+                ds, force_key, self._nodes, self._members,
+                getattr(self, "_transverse_map", {}), sel_girder,
+                edge_dist=self._edge_dist, eng_scale=eng_scale,
+            )
+        elif force_key in _SFD_KEYS:
             self._fig, self._summary_data = build_figure_sfd(
                 ds, force_key, self._nodes, self._members,
                 edge_dist=self._edge_dist, eng_scale=eng_scale,
@@ -588,7 +597,14 @@ class MplPlotWidget(QWidget):
                 return
 
             ax = self._fig.axes[0]
-            if old_elev is not None and old_azim is not None:
+            # Keep the user's camera only within the same plot family: transverse
+            # members run across the width and are unreadable in the girders'
+            # front elevation, so switching families uses the figure's own view.
+            from osdagbridge.core.utils.common import ANALYSIS_TRANSVERSE_SELECTIONS
+            family = "transverse" if sel_girder in ANALYSIS_TRANSVERSE_SELECTIONS else "girder"
+            same_family = getattr(self, "_last_plot_family", family) == family
+            self._last_plot_family = family
+            if old_elev is not None and old_azim is not None and same_family:
                 ax.view_init(elev=old_elev, azim=old_azim)
 
             title = ax.get_title()

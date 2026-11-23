@@ -1,0 +1,54 @@
+{
+ "skew": "15",
+ "n_elements": 121,
+ "n_nodes": 70,
+ "group_sizes": {
+  "edge_beam": 13,
+  "exterior_main_beam_1": 13,
+  "exterior_main_beam_2": 13,
+  "interior_main_beam": 13,
+  "start_edge": 4,
+  "end_edge": 4,
+  "transverse_slab": 48
+ },
+ "overlap_long_trans_groups": 0,
+ "unassigned_by_groups": [
+  13,
+  22,
+  31,
+  40,
+  49,
+  58,
+  67,
+  76,
+  85,
+  94,
+  103,
+  112,
+  121
+ ],
+ "geo_long_but_group_trans": [],
+ "geo_trans_but_group_long": [],
+ "all_y_zero": true,
+ "result_data_keys": [
+  "crossbracings",
+  "disp_components",
+  "displacements",
+  "force_components",
+  "forces",
+  "girders",
+  "loadcases",
+  "longitudinal_members",
+  "members",
+  "nodes",
+  "transverse_members",
+  "transverse_slab"
+ ],
+ "n_crossbracings_in_result_data": 24,
+ "girders": [
+  "G1",
+  "G2",
+  "G3"
+ ],
+ "edge_dist": 0.9833
+}

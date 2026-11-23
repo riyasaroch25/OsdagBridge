@@ -140,6 +140,16 @@ KEY_ANALYSIS_LOAD_COMBINATION = "analysis.load_combination"
 KEY_ANALYSIS_FORCES           = "analysis.forces"
 KEY_ANALYSIS_DISPLAY_OPTIONS  = "analysis.display_options"
 KEY_ANALYSIS_UTILIZATION      = "analysis.utilization"
+# Transverse-member entries of the analysis Member dropdown (Task III):
+# dropdown text -> key of results_data.build_transverse_member_map()
+VALUE_ANALYSIS_ALL_TRANSVERSE = "All Transverse Members"
+VALUE_ANALYSIS_END_DIAPHRAGMS = "End Diaphragms"
+VALUE_ANALYSIS_CROSS_BRACINGS = "Cross Bracings"
+ANALYSIS_TRANSVERSE_SELECTIONS = {
+    VALUE_ANALYSIS_ALL_TRANSVERSE: ("end_diaphragms", "cross_bracings"),
+    VALUE_ANALYSIS_END_DIAPHRAGMS: ("end_diaphragms",),
+    VALUE_ANALYSIS_CROSS_BRACINGS: ("cross_bracings",),
+}
 
 KEY_STEELDESIGN_MEMBER_ID = "steeldesign.member_id"
 KEY_STEELDESIGN_LOAD_COMBINATION = "steeldesign.load_combination"

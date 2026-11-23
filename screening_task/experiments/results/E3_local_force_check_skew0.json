@@ -1,0 +1,69 @@
+{
+ "skew": "0",
+ "per_kind": {
+  "girder/edge (longitudinal)": {
+   "n_elements": 65,
+   "max_abs_error": 0.0,
+   "max_force_magnitude": 488769.18648500665,
+   "axis_sign_pattern": [
+    1,
+    -1,
+    -1,
+    1,
+    -1,
+    -1
+   ]
+  },
+  "end_diaphragms": {
+   "n_elements": 4,
+   "max_abs_error": 0.0,
+   "max_force_magnitude": 73888.36327663017,
+   "axis_sign_pattern": [
+    1,
+    -1,
+    -1,
+    1,
+    -1,
+    -1
+   ]
+  },
+  "cross_bracings": {
+   "n_elements": 24,
+   "max_abs_error": 0.0,
+   "max_force_magnitude": 26784.78288550624,
+   "axis_sign_pattern": [
+    1,
+    -1,
+    -1,
+    1,
+    -1,
+    -1
+   ]
+  }
+ },
+ "transverse_map_counts": {
+  "end_diaphragms": 4,
+  "cross_bracings": 24
+ },
+ "example_end_diaphragm": [
+  {
+   "member": "2",
+   "nodes": [
+    2,
+    3
+   ],
+   "left_girder": "G1",
+   "right_girder": "G2"
+  },
+  {
+   "member": "3",
+   "nodes": [
+    3,
+    4
+   ],
+   "left_girder": "G2",
+   "right_girder": "G3"
+  }
+ ],
+ "n_girders": 3
+}

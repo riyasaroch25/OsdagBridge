@@ -1552,6 +1552,99 @@ def build_figure_deflection(ds, disp_key, nodes, members, edge_dist=0.0, eng_sca
     return fig, summary_data
 
 
+# =============================================================================
+# TRANSVERSE MEMBERS (Task III)
+# =============================================================================
+
+_TRANSVERSE_TITLES = {"F": "Shear / Axial Force Diagram", "M": "Moment Diagram", "D": "Deflection Diagram"}
+_FORCE_SYMBOL = {"Fx": "F$_x$", "Fy": "V$_y$", "Fz": "V$_z$", "Mx": "T$_x$", "My": "M$_y$", "Mz": "M$_z$",
+                 "Dx": "D$_x$", "Dy": "D$_y$", "Dz": "D$_z$"}
+
+
+def build_figure_transverse(ds, force_key, nodes, members, transverse_map, selection,
+                            edge_dist=0.0, eng_scale=1.0):
+    """
+    3-D diagram of one response component along transverse members
+    (end diaphragms and/or intermediate cross bracings).
+
+    Values come from ``results_data.transverse_member_results``: member-local
+    internal forces (kN, kN·m) or global nodal displacements (mm). Each
+    transverse grillage element is drawn as one member (no diagonal/chord split).
+
+    Returns (fig, summary_data) with summary_data = {"ED G1–G2": {"max", "min"}, ...}.
+    """
+    from osdagbridge.core.utils.common import ANALYSIS_TRANSVERSE_SELECTIONS
+    from .results_data import transverse_member_results
+
+    v_scale = _value_plot_scale(eng_scale)
+    unit = "mm" if force_key.startswith("D") else ("kNm" if force_key.startswith("M") else "kN")
+    symbol = _FORCE_SYMBOL.get(force_key, force_key)
+    groups = ANALYSIS_TRANSVERSE_SELECTIONS.get(selection, ())
+    tags = {"end_diaphragms": "ED", "cross_bracings": "CB"}
+
+    fig = Figure(figsize=(14, 6), dpi=110, facecolor="white")
+    ax = fig.add_subplot(111, projection="3d", facecolor="white")
+    all_xs = [c[0] for c in nodes.values()]
+    all_zs = [c[2] for c in nodes.values()]
+    x_range = (max(all_xs) - min(all_xs)) or 1.0
+    z_range = (max(all_zs) - min(all_zs)) or 1.0
+    ax.set_xlim(min(all_xs), max(all_xs))
+    ax.set_ylim(min(all_zs), max(all_zs))
+
+    _add_grillage_background(ax, nodes, members, show_transverse=False,
+                             include_edge_longitudinals=False, include_end_transverse=False,
+                             show_inner_nodes=False)
+
+    colors = {"end_diaphragms": ("#6A1B9A", "#CE93D8"), "cross_bracings": ("#C62828", "#EF9A9A")}
+    summary, vmin, vmax = {}, 0.0, 0.0
+    for group in groups:
+        rows = transverse_member_results(ds, nodes, members, transverse_map.get(group, []), force_key)
+        line_c, fill_c = colors[group]
+        for r in rows:
+            (xi, _, zi), (xj, _, zj) = r["xyz_i"], r["xyz_j"]
+            vi, vj = r["value_i"] * v_scale, r["value_j"] * v_scale
+            ax.plot([xi, xj], [zi, zj], [0, 0], color="#555555", linewidth=1.6, zorder=3)
+            ax.plot_surface(np.array([[xi, xj], [xi, xj]]), np.array([[zi, zj], [zi, zj]]),
+                            np.array([[0.0, 0.0], [vi, vj]]), color=fill_c, alpha=0.35,
+                            linewidth=0, antialiased=False, zorder=2)
+            ax.plot([xi, xj], [zi, zj], [vi, vj], color=line_c, linewidth=2.0, zorder=4)
+            for x, z, v, real in ((xi, zi, vi, r["value_i"]), (xj, zj, vj, r["value_j"])):
+                ax.text(x, z, v, f" {real:.2f}", color="#333333", fontsize=7, zorder=6, gid="all_vals")
+            name = f"{tags[group]} {r['left_girder']}–{r['right_girder']}"
+            s = summary.setdefault(name, {"max": -np.inf, "min": np.inf})
+            s["max"] = max(s["max"], r["value_i"], r["value_j"])
+            s["min"] = min(s["min"], r["value_i"], r["value_j"])
+            vmin, vmax = min(vmin, vi, vj), max(vmax, vi, vj)
+        # Extreme values of the group (toggled by the Max/Min checkboxes)
+        if rows:
+            hi = max(rows, key=lambda r: max(r["value_i"], r["value_j"]))
+            lo = min(rows, key=lambda r: min(r["value_i"], r["value_j"]))
+            for r, gid, pick in ((hi, "max_line", max), (lo, "min_line", min)):
+                end = "i" if pick(r["value_i"], r["value_j"]) == r["value_i"] else "j"
+                x, _, z = r[f"xyz_{end}"]
+                real = r[f"value_{end}"]
+                ax.text(x, z, real * v_scale, f" {real:.2f} {unit}", color="#111111", fontsize=8,
+                        fontweight="bold", zorder=7, gid=gid,
+                        bbox=dict(facecolor="white", edgecolor="none", alpha=0.85, pad=1.0))
+
+    if not summary:
+        ax.text2D(0.5, 0.5, "No transverse members found for this selection",
+                  transform=ax.transAxes, ha="center")
+    span = max(1e-9, vmax - vmin)
+    ax.set_zlim(vmin - 0.05 * span, vmax + 0.05 * span)
+    ax.set_box_aspect([x_range, z_range, x_range * 0.30 * max(v_scale, 1e-6)])
+    _set_value_axis_tick_formatter(ax, v_scale)
+    ax.set_xlabel("Span Length (m)", fontsize=10, labelpad=8)
+    ax.set_ylabel("Bridge Width (m)", fontsize=10, labelpad=8)
+    ax.set_zlabel(f"{symbol} ({unit})", fontsize=10, labelpad=8)
+    kind = _TRANSVERSE_TITLES[force_key[0]] if force_key[0] in _TRANSVERSE_TITLES else "Diagram"
+    ax.set_title(f"{selection}: {kind}  —  {symbol} ({unit}, member-local)", fontsize=12,
+                 fontweight="bold", pad=12)
+    fig._eng_scale = v_scale
+    ax.view_init(elev=25, azim=-60)
+    return fig, summary
+
+
 def figure_to_bytes(fig, fmt="png", dpi=150):
     """Convenience helper — render a matplotlib figure to raw bytes."""
     buf = io.BytesIO()
