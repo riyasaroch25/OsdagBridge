@@ -6,9 +6,10 @@ Author: Arushi
 
 import math
 from PySide6.QtWidgets import QWidget, QPushButton, QScrollArea
-from PySide6.QtCore import Qt, QRectF, QPointF, QTimer, QSize
+from PySide6.QtCore import Qt, QRectF, QPointF, QTimer, QSize, Signal
 from PySide6.QtGui import QPainter, QPen, QColor, QFont, QBrush, QPolygonF, QIcon, QPixmap
 from osdagbridge.core.utils.common import *
+from osdagbridge.desktop.ui.docks.cad_label_editing import EditableLabelsMixin
 from osdagbridge.desktop.cad.irc5_geometry import (
     CrashBarrierGeometry,
     RailingGeometry,
@@ -16,8 +17,10 @@ from osdagbridge.desktop.cad.irc5_geometry import (
 )
 
 
-class CrossSectionCADWidget(QWidget):
+class CrossSectionCADWidget(EditableLabelsMixin, QWidget):
     """Widget for drawing bridge cross-section view"""
+    # Emitted when a CAD dimension label is edited in place: (central key, raw text)
+    label_value_edited = Signal(str, str)
     # ===== SHARED CAD COLORS =====
     GIRDER_COLOR = QColor(179, 180, 160) 
     STIFFENER_COLOR = QColor(210, 210, 205)
@@ -256,6 +259,8 @@ class CrossSectionCADWidget(QWidget):
 
 
     def eventFilter(self, obj, event):
+        if self._label_editor_event_filter(obj, event):
+            return True
         """Filter events to catch viewport resize"""
         if obj == (self.scroll_area.viewport() if self.scroll_area else None):
             if event.type() == event.Type.Resize:
@@ -694,6 +699,7 @@ class CrossSectionCADWidget(QWidget):
 
     def mouseMoveEvent(self, event):
         """Handle mouse hover for both labels and structural elements"""
+        self._label_hover_feedback(event.position() if hasattr(event, 'position') else event.pos())
         if not getattr(self, 'interactive_hover', True):
             return
         pos = event.position() if hasattr(event, 'position') else event.pos()
@@ -727,6 +733,7 @@ class CrossSectionCADWidget(QWidget):
             self._position_zoom_buttons()
             self._buttons_positioned = True
         # clear hover labels and zones at start of each paint
+        self._reset_label_registry()
         self.hover_labels = []
         self.cross_section_hover_zones = []
         
@@ -770,6 +777,7 @@ class CrossSectionCADWidget(QWidget):
         painter.setPen(Qt.NoPen)
         painter.setBrush(QBrush(bg_color))
         painter.drawRect(bg_rect)
+        self._record_label(bg_rect, text)
 
         # Draw each text line
         painter.setPen(QPen(text_color, 0.8))

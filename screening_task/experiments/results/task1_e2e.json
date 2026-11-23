@@ -1,0 +1,188 @@
+[
+  {
+    "case": "girder spacing 1.80 (cross-section)",
+    "found_label": true,
+    "editor_opened": true,
+    "open_ms": 110.3,
+    "dialogs": [],
+    "input_dict": {
+      "geometry.span": "20",
+      "geometry.carriageway_width": "5",
+      "typical_section.girder_spacing": 1.8,
+      "typical_section.deck_thickness": 250.0,
+      "typical_section.deck_overhang": 1.15,
+      "typical_section.overall_bridge_width": 5.9,
+      "typical_section.no_of_girders": 3
+    }
+  },
+  {
+    "case": "deck thickness 220 mm",
+    "found_label": true,
+    "editor_opened": true,
+    "open_ms": 113.3,
+    "dialogs": [],
+    "input_dict": {
+      "geometry.span": "20",
+      "geometry.carriageway_width": "5",
+      "typical_section.girder_spacing": 1.8,
+      "typical_section.deck_thickness": 220.0,
+      "typical_section.deck_overhang": 1.15,
+      "typical_section.overall_bridge_width": 5.9,
+      "typical_section.no_of_girders": 3
+    }
+  },
+  {
+    "case": "carriageway width 7.5 m",
+    "found_label": true,
+    "editor_opened": true,
+    "open_ms": 102.2,
+    "dialogs": [],
+    "input_dict": {
+      "geometry.span": "20",
+      "geometry.carriageway_width": "7.5",
+      "typical_section.girder_spacing": 2.8,
+      "typical_section.deck_thickness": 250.0,
+      "typical_section.deck_overhang": 1.4,
+      "typical_section.overall_bridge_width": 8.4,
+      "typical_section.no_of_girders": 3
+    }
+  },
+  {
+    "case": "span length 30 m (plan view)",
+    "found_label": true,
+    "editor_opened": true,
+    "open_ms": 112.7,
+    "dialogs": [],
+    "input_dict": {
+      "geometry.span": "30",
+      "geometry.carriageway_width": "7.5",
+      "typical_section.girder_spacing": 2.8,
+      "typical_section.deck_thickness": 250.0,
+      "typical_section.deck_overhang": 1.4,
+      "typical_section.overall_bridge_width": 8.4,
+      "typical_section.no_of_girders": 3
+    }
+  },
+  {
+    "case": "girder spacing 2.2 (plan view)",
+    "found_label": true,
+    "editor_opened": true,
+    "open_ms": 103.7,
+    "dialogs": [],
+    "input_dict": {
+      "geometry.span": "30",
+      "geometry.carriageway_width": "7.5",
+      "typical_section.girder_spacing": 2.2,
+      "typical_section.deck_thickness": 250.0,
+      "typical_section.deck_overhang": 2.0,
+      "typical_section.overall_bridge_width": 8.4,
+      "typical_section.no_of_girders": 3
+    }
+  },
+  {
+    "case": "deck thickness 50 mm (out of range)",
+    "found_label": true,
+    "editor_opened": true,
+    "open_ms": 110.2,
+    "dialogs": [
+      {
+        "title": "Invalid Value",
+        "text": "Deck thickness must be at least 100 mm."
+      }
+    ],
+    "input_dict": {
+      "geometry.span": "30",
+      "geometry.carriageway_width": "7.5",
+      "typical_section.girder_spacing": 2.2,
+      "typical_section.deck_thickness": 250.0,
+      "typical_section.deck_overhang": 2.0,
+      "typical_section.overall_bridge_width": 8.4,
+      "typical_section.no_of_girders": 3
+    }
+  },
+  {
+    "case": "girder spacing 99 (infeasible)",
+    "found_label": true,
+    "editor_opened": true,
+    "open_ms": 107.2,
+    "dialogs": [
+      {
+        "title": "Invalid Value",
+        "text": "Girder spacing is outside the practical range allowed in the software."
+      }
+    ],
+    "input_dict": {
+      "geometry.span": "30",
+      "geometry.carriageway_width": "7.5",
+      "typical_section.girder_spacing": 2.2,
+      "typical_section.deck_thickness": 250.0,
+      "typical_section.deck_overhang": 2.0,
+      "typical_section.overall_bridge_width": 8.4,
+      "typical_section.no_of_girders": 3
+    }
+  },
+  {
+    "case": "overhang (locked)",
+    "found_label": true,
+    "editor_opened": false,
+    "open_ms": 103.9,
+    "dialogs": [],
+    "input_dict": {
+      "geometry.span": "30",
+      "geometry.carriageway_width": "7.5",
+      "typical_section.girder_spacing": 2.2,
+      "typical_section.deck_thickness": 250.0,
+      "typical_section.deck_overhang": 2.0,
+      "typical_section.overall_bridge_width": 8.4,
+      "typical_section.no_of_girders": 3
+    }
+  },
+  {
+    "case": "overall width (locked)",
+    "found_label": true,
+    "editor_opened": false,
+    "open_ms": 124.8,
+    "dialogs": [],
+    "input_dict": {
+      "geometry.span": "30",
+      "geometry.carriageway_width": "7.5",
+      "typical_section.girder_spacing": 2.2,
+      "typical_section.deck_thickness": 250.0,
+      "typical_section.deck_overhang": 2.0,
+      "typical_section.overall_bridge_width": 8.4,
+      "typical_section.no_of_girders": 3
+    }
+  },
+  {
+    "case": "deck thickness Esc cancels",
+    "found_label": true,
+    "editor_opened": true,
+    "open_ms": 106.3,
+    "dialogs": [],
+    "input_dict": {
+      "geometry.span": "30",
+      "geometry.carriageway_width": "7.5",
+      "typical_section.girder_spacing": 2.2,
+      "typical_section.deck_thickness": 250.0,
+      "typical_section.deck_overhang": 2.0,
+      "typical_section.overall_bridge_width": 8.4,
+      "typical_section.no_of_girders": 3
+    }
+  },
+  {
+    "case": "edit while dock locked",
+    "found_label": true,
+    "editor_opened": false,
+    "open_ms": 104.5,
+    "dialogs": [],
+    "input_dict": {
+      "geometry.span": "30",
+      "geometry.carriageway_width": "7.5",
+      "typical_section.girder_spacing": 2.2,
+      "typical_section.deck_thickness": 250.0,
+      "typical_section.deck_overhang": 2.0,
+      "typical_section.overall_bridge_width": 8.4,
+      "typical_section.no_of_girders": 3
+    }
+  }
+]

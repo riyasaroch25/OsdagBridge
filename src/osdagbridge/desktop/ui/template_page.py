@@ -351,6 +351,7 @@ class CustomWindow(QWidget):
             QSizePolicy.Expanding, QSizePolicy.Expanding
         )
         self.cad_log_splitter.addWidget(self.cad_comp_widget)
+        self._enable_cad_label_editing()
 
         # from osdagbridge.desktop.ui.cad_3d import CAD3DWindow
         # 3D CAD placeholder (mutually exclusive with dual view + plots)
@@ -881,6 +882,74 @@ class CustomWindow(QWidget):
                 text=f"Could not load OSI file:\n{e}",
                 dialogType=MessageBoxType.Warning
             ).exec()
+
+    #-------Interactive-2D-CAD-Label-Editing (Task I)-START--------------------
+
+    def _enable_cad_label_editing(self):
+        """Opt the template-page CAD views into double-click label editing."""
+        for view in (self.cad_comp_widget.cross_section_widget,
+                     self.cad_comp_widget.top_view_widget):
+            view.labels_editable = True
+            view.label_edit_guard = self._cad_label_edit_allowed
+            view.label_value_edited.connect(self._on_cad_label_edited)
+
+    def _cad_label_edit_allowed(self):
+        dock = getattr(self, "input_dock", None)
+        if dock is not None and dock.is_locked:
+            return False, "Inputs are locked after design. Unlock to edit."
+        return True, ""
+
+    def _on_cad_label_edited(self, key: str, raw_text: str):
+        """Apply a value typed on the 2D CAD through the regular input pipelines."""
+        from osdagbridge.core.bridge_types.plate_girder.cad_parameter_editing import (
+            evaluate_cad_edit, spec_for_key,
+        )
+        spec = spec_for_key(key)
+        allowed, reason = self._cad_label_edit_allowed()
+        if spec is None or not allowed:
+            return
+
+        if spec.basic:
+            # Basic input: behave exactly as if typed into the input-dock field,
+            # so the dock's own validation, required-field re-solve and CAD refresh run.
+            from osdagbridge.core.bridge_types.plate_girder.cad_parameter_editing import parse_number
+            value = parse_number(raw_text)
+            field = self.input_dock.input_widget.findChild(QLineEdit, key) if self.input_dock else None
+            if value is None or value <= 0 or field is None:
+                CustomMessageBox(title="Invalid Value",
+                                 text=f"{spec.caption} must be a positive numeric value ({spec.unit}).",
+                                 dialogType=MessageBoxType.Critical).exec()
+                return
+            field.setText(f"{value:g}")
+            self.input_dock._on_field_edited(key, field)
+            return
+
+        # Additional input: make sure derived defaults exist first, otherwise a later
+        # solve_extend_basic_input_dict() would overwrite the user's edit.
+        if self.input_dock is not None and self.input_dock.is_require_field_changed:
+            try:
+                solve_extend_basic_input_dict(self.input_dict)
+                self.input_dock.is_require_field_changed = False
+            except Exception as exc:
+                CustomMessageBox(title="Invalid Inputs", text=str(exc),
+                                 dialogType=MessageBoxType.Critical).exec()
+                return
+
+        result = evaluate_cad_edit(self.input_dict, key, raw_text)
+        if not result.ok:
+            CustomMessageBox(title="Invalid Value", text=result.message,
+                             dialogType=MessageBoxType.Critical).exec()
+            return
+
+        self.input_dict.update(result.updates)
+        # Force the dual CAD to re-push these values even if its change cache is stale
+        # (Additional Inputs "Save" updates the cross-section directly, bypassing it).
+        cache = self.cad_comp_widget._last_mapped_params
+        for param in ("girder_spacing", "deck_overhang", "deck_thickness", "num_girders"):
+            cache.pop(param, None)
+        self.cad_comp_widget.update_from_osdag_inputs(self.input_dict)
+
+    #-------Interactive-2D-CAD-Label-Editing (Task I)-END----------------------
 
     def update_cad_from_inputs(self):
         """

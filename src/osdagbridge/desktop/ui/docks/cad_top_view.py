@@ -4,9 +4,10 @@ Handles top/plan view rendering of bridge structures
 Author: Arushi
 """
 from osdagbridge.core.utils.common import *
+from osdagbridge.desktop.ui.docks.cad_label_editing import EditableLabelsMixin
 import math
 from PySide6.QtWidgets import QWidget, QPushButton, QScrollArea
-from PySide6.QtCore import Qt, QRectF, QPointF, QTimer, QSize
+from PySide6.QtCore import Qt, QRectF, QPointF, QTimer, QSize, Signal
 from PySide6.QtGui import QPainter, QPen, QColor, QFont, QBrush, QPolygonF, QIcon
 from .cad_cross_section import CrossSectionCADWidget
 
@@ -25,8 +26,10 @@ DIM_STACK_GAP = 28         # vertical gap between stacked dimensions
 LEADER_TEXT_OFFSET = 25    # leader label distance
 
 
-class TopViewCADWidget(QWidget):
+class TopViewCADWidget(EditableLabelsMixin, QWidget):
     """Widget for drawing bridge top view"""
+    # Emitted when a CAD dimension label is edited in place: (central key, raw text)
+    label_value_edited = Signal(str, str)
     
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -440,6 +443,8 @@ class TopViewCADWidget(QWidget):
 
 
     def eventFilter(self, obj, event):
+        if self._label_editor_event_filter(obj, event):
+            return True
         """Filter events to catch viewport resize"""
         if obj == (self.scroll_area.viewport() if self.scroll_area else None):
             if event.type() == event.Type.Resize:
@@ -464,6 +469,7 @@ class TopViewCADWidget(QWidget):
     
     def mouseMoveEvent(self, event):
         """Handle mouse hover for top view"""
+        self._label_hover_feedback(event.position() if hasattr(event, 'position') else event.pos())
         pos = event.position() if hasattr(event, 'position') else event.pos()
         
         # top view hover logic
@@ -479,6 +485,7 @@ class TopViewCADWidget(QWidget):
 
     def paintEvent(self, event):
         # clear hover zones at start of each paint
+        self._reset_label_registry()
         self.top_view_hover_zones = []
         
         painter = QPainter(self)
@@ -518,6 +525,7 @@ class TopViewCADWidget(QWidget):
         painter.setPen(Qt.NoPen)
         painter.setBrush(QBrush(bg_color))
         painter.drawRect(bg_rect)
+        self._record_label(bg_rect, text)
 
         # Draw each text line
         painter.setPen(QPen(text_color, 0.8))
