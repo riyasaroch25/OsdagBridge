@@ -43,6 +43,10 @@ TYPE_SEGMENT_TABLE  = "segment_table"
 TYPE_ADAPTIVE = "adaptive"
 TYPE_ALL_CUSTOM = "all_custom"   # combo [All, Custom] where Custom opens popup dialog
 
+# ── "Custom" option handling (Additional Inputs save validation) ──────────────
+VALUE_CUSTOM = "Custom"                       # choice text that unlocks user-entered values
+SCHEMA_CUSTOM_REQUIRES = "custom_requires"    # schema field attr: keys required when choice == VALUE_CUSTOM
+
 # ========== Type of Fields End ==========================================================
 
 # Keys for inputs (consistent dot notation for object names)

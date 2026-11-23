@@ -1,0 +1,142 @@
+[
+  {
+    "case": "open dialog (no user edits)",
+    "is_modified": false,
+    "visible": true,
+    "dialogs": []
+  },
+  {
+    "case": "close without changes",
+    "is_modified": false,
+    "visible": false,
+    "dialogs": []
+  },
+  {
+    "case": "gust factor -> Custom (empty)",
+    "is_modified": true,
+    "visible": true,
+    "dialogs": []
+  },
+  {
+    "case": "save with empty custom value",
+    "is_modified": true,
+    "visible": true,
+    "dialogs": [
+      {
+        "title": "Error",
+        "text": "Error: The custom value for 'Gust Factor, G' cannot be empty.",
+        "buttons": [
+          "OK"
+        ],
+        "type": "Critical",
+        "answer": "OK"
+      }
+    ],
+    "error_style": true
+  },
+  {
+    "case": "save with two empty custom values",
+    "is_modified": true,
+    "visible": true,
+    "dialogs": [
+      {
+        "title": "Input Error",
+        "text": "Custom gust factor must be a numeric value.",
+        "buttons": null,
+        "type": "Warning",
+        "answer": "OK"
+      },
+      {
+        "title": "Error",
+        "text": "Error: The custom value for 'Width (m)' cannot be empty.",
+        "buttons": [
+          "OK"
+        ],
+        "type": "Critical",
+        "answer": "OK"
+      }
+    ]
+  },
+  {
+    "case": "save after filling values",
+    "is_modified": false,
+    "visible": true,
+    "dialogs": [
+      {
+        "title": "Input Error",
+        "text": "Custom gust factor must be a numeric value.",
+        "buttons": null,
+        "type": "Warning",
+        "answer": "OK"
+      },
+      {
+        "title": "Saved",
+        "text": "Inputs saved successfully.",
+        "buttons": [
+          "OK"
+        ],
+        "type": "Success",
+        "answer": "OK"
+      }
+    ]
+  },
+  {
+    "case": "edit then close -> Cancel",
+    "is_modified": true,
+    "visible": true,
+    "dialogs": [
+      {
+        "title": "Unsaved Changes",
+        "text": "You have unsaved changes. Closing this window will discard them. Do you want to proceed?",
+        "buttons": [
+          "Discard",
+          "Cancel"
+        ],
+        "type": "Warning",
+        "answer": "Cancel"
+      }
+    ]
+  },
+  {
+    "case": "edit then Esc -> Cancel",
+    "is_modified": true,
+    "visible": true,
+    "dialogs": [
+      {
+        "title": "Unsaved Changes",
+        "text": "You have unsaved changes. Closing this window will discard them. Do you want to proceed?",
+        "buttons": [
+          "Discard",
+          "Cancel"
+        ],
+        "type": "Warning",
+        "answer": "Cancel"
+      }
+    ]
+  },
+  {
+    "case": "edit then close -> Discard",
+    "is_modified": false,
+    "visible": false,
+    "dialogs": [
+      {
+        "title": "Unsaved Changes",
+        "text": "You have unsaved changes. Closing this window will discard them. Do you want to proceed?",
+        "buttons": [
+          "Discard",
+          "Cancel"
+        ],
+        "type": "Warning",
+        "answer": "Discard"
+      }
+    ],
+    "deck_in_input_dict": 250.0
+  },
+  {
+    "case": "reopen after discard",
+    "is_modified": false,
+    "visible": true,
+    "dialogs": [],
+    "deck_widget": "250.00"
+  }
+]

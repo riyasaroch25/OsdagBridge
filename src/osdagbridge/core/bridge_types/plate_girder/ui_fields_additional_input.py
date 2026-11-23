@@ -49,6 +49,7 @@ _CRASH_BARRIER_TAB_SCHEMA = {
             "fields": [
                 {
                     "id": KEY_CB_TYPE,
+                    SCHEMA_CUSTOM_REQUIRES: [KEY_CB_DENSITY, KEY_CB_WIDTH, KEY_CB_HEIGHT, KEY_CB_AREA, KEY_CB_LOAD],
                     "label": "Type:",
                     "type": TYPE_COMBOBOX,
                     "choices": [
@@ -132,6 +133,7 @@ _MEDIAN_TAB_SCHEMA = {
             "fields": [
                 {
                     "id": KEY_MD_TYPE,
+                    SCHEMA_CUSTOM_REQUIRES: [KEY_MD_DENSITY, KEY_MD_WIDTH, KEY_MD_HEIGHT, KEY_MD_AREA, KEY_MD_LOAD],
                     "label": "Type:",
                     "type": TYPE_COMBOBOX,
                     "choices": [
@@ -214,6 +216,7 @@ _RAILING_TAB_SCHEMA = {
             "fields": [
                 {
                     "id": KEY_RL_TYPE,
+                    SCHEMA_CUSTOM_REQUIRES: [KEY_RL_WIDTH, KEY_RL_HEIGHT],
                     "label": "Type:",
                     "type": TYPE_COMBOBOX,
                     "choices": VALUES_RAILING_TYPE,
@@ -245,6 +248,7 @@ _RAILING_TAB_SCHEMA = {
             "fields": [
                 {
                     "id": KEY_RL_LOAD_MODE,
+                    SCHEMA_CUSTOM_REQUIRES: [KEY_RL_LOAD_VALUE],
                     "label": "Mode:",
                     "type": TYPE_COMBOBOX,
                     "choices": ["As per IRC 6", "Custom"],
@@ -270,6 +274,7 @@ _WEARING_COURSE_TAB_SCHEMA = {
             "fields": [
                 {
                     "id": KEY_WC_MATERIAL,
+                    SCHEMA_CUSTOM_REQUIRES: [KEY_WC_DENSITY],
                     "label": "Material:",
                     "type": TYPE_COMBOBOX,
                     "choices": VALUES_WEARING_COAT_MATERIAL,
