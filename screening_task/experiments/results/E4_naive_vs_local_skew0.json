@@ -1,0 +1,58 @@
+{
+ "skew": null,
+ "n_members": 28,
+ "loadcases": {
+  "1.0 DL": {
+   "Fx": {
+    "peak_local": 0.0,
+    "peak_naive_global": 0.0
+   },
+   "Fy": {
+    "peak_local": 46.42,
+    "peak_naive_global": 46.42
+   },
+   "Fz": {
+    "peak_local": 0.0,
+    "peak_naive_global": 0.0
+   },
+   "Mx": {
+    "peak_local": 0.001,
+    "peak_naive_global": 62.41
+   },
+   "My": {
+    "peak_local": 0.0,
+    "peak_naive_global": 0.0
+   },
+   "Mz": {
+    "peak_local": 62.41,
+    "peak_naive_global": 0.001
+   }
+  },
+  "Case1 1xClassA": {
+   "Fx": {
+    "peak_local": 0.0,
+    "peak_naive_global": 0.0
+   },
+   "Fy": {
+    "peak_local": 32.961,
+    "peak_naive_global": 32.961
+   },
+   "Fz": {
+    "peak_local": 0.0,
+    "peak_naive_global": 0.0
+   },
+   "Mx": {
+    "peak_local": 0.001,
+    "peak_naive_global": 45.735
+   },
+   "My": {
+    "peak_local": 0.0,
+    "peak_naive_global": 0.0
+   },
+   "Mz": {
+    "peak_local": 45.735,
+    "peak_naive_global": 0.001
+   }
+  }
+ }
+}
